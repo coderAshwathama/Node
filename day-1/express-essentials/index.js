@@ -5,7 +5,17 @@ const app = express();
 const PORT = 3001;
 
 app.get("/", (request, response) => {
-  response.send("This is a GET request at /");
+  response.json(data);
+});
+app.post("/create", (request, response) => {
+  response.send("This is a Post request at /create");
+});
+app.put("/edit", (request, response) => {
+  response.send("This is a Put request at /edit");
+});
+
+app.delete("/delete", (request, response) => {
+  response.send("This is a DELETE request at /delete");
 });
 
 app.listen(PORT, () => {
