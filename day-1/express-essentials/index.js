@@ -1,9 +1,10 @@
 import express from "express";
-
+import data from "./data/mock.json" with { type: "json" };
 const app = express();
 
 const PORT = 3001;
 
 app.listen(PORT, () => {
   console.log("The server is running on port  ", PORT);
+  console.log(data);
 });
