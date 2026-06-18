@@ -4,6 +4,14 @@ const app = express();
 
 const PORT = 3001;
 
+// using the public folder at the root of the project
+
+app.use(express.static("public"));
+
+// using hte images in the route/images
+
+app.use("/images", express.static("images"));
+
 app.get("/", (request, response) => {
   response.json(data);
 });
