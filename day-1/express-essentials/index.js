@@ -15,6 +15,13 @@ app.use("/images", express.static("images"));
 app.get("/", (request, response) => {
   response.json(data);
 });
+
+// GET with routing parameters
+
+app.get("/class/:id", (request, response) => {
+  console.log(request.params);
+});
+
 app.post("/create", (request, response) => {
   response.send("This is a Post request at /create");
 });
@@ -28,5 +35,4 @@ app.delete("/delete", (request, response) => {
 
 app.listen(PORT, () => {
   console.log("The server is running on port  ", PORT);
-  console.log(data);
 });
