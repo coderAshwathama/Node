@@ -10,7 +10,11 @@ app.get("/", (req, res) => {
 
 // Industry Standard way to start the server
 app.get("/api/v1/users", (req, res) => {
-  res.status(200).send(userData);
+  const { first_name } = req.query;
+  if (first_name) {
+    const user = userData.filter((data) => first_name === data.first_name);
+    res.status(200).send(user);
+  }
 });
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
