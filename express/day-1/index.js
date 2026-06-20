@@ -38,6 +38,28 @@ app.post("/api/v1/users", (req, res) => {
   });
 });
 
+app.put("/app/v1/users/:id", (req, res) => {
+  console.log(req.body, req.params);
+
+  const {
+    body,
+    params: { id },
+  } = req;
+
+  const parsedId = parseInt(id);
+  const userIndex = userData.findIndex((user) => user.id === parsedId);
+
+  if (userIndex === -1) {
+    res.status(404).send("User Not Found");
+  }
+  userData(userIndex)={
+    id:parsedId, ...body
+  }
+  res.status(200).send({message:"User Updataed", 
+    data: userData[userIndex]
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
