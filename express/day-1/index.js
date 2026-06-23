@@ -38,7 +38,7 @@ app.post("/api/v1/users", (req, res) => {
   });
 });
 
-app.put("/app/v1/users/:id", (req, res) => {
+app.put("/api/v1/users/:id", (req, res) => {
   console.log(req.body, req.params);
 
   const {
@@ -50,16 +50,48 @@ app.put("/app/v1/users/:id", (req, res) => {
   const userIndex = userData.findIndex((user) => user.id === parsedId);
 
   if (userIndex === -1) {
-    res.status(404).send("User Not Found");
+    return res.status(404).send("User Not Found");
   }
-  userData(userIndex)={
-    id:parsedId, ...body
+  userData[userIndex] = {
+    id: parsedId,
+    ...body,
+  };
+  res.status(200).send({ message: "User Updated", data: userData[userIndex] });
+});
+app.patch("/api/v1/users/:id", (req, res) => {
+  const {
+    body,
+    params: { id },
+  } = req;
+
+  const parsedId = parseInt(id);
+  const userIndex = userData.findIndex((user) => user.id === parsedId);
+
+  if (userIndex === -1) {
+    return res.status(404).send("User Not Found");
   }
-  res.status(200).send({message:"User Updataed", 
-    data: userData[userIndex]
-  });
+  userData[userIndex] = {
+    ...userData[userIndex],
+    ...body,
+  };
+  res.status(200).send({ message: "User Updated", data: userData[userIndex] });
 });
 
+app.delete("/api/v1/users/:id", (req, res) => {
+  const { id } = req.params;
+
+  const parsedId = parseInt(id);
+
+  const userIndex = userData.findIndex((user) => user.id === parsedId);
+
+  if (userIndex === -1) {
+    return res.status(404).send({ message: "User Not Found" });
+  }
+
+  const deletedUser = userData.splice(userIndex, 1);
+
+  res.status(200).send({ message: "User Deleted", data: deletedUser[0] });
+});
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
