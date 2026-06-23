@@ -5,6 +5,10 @@ const authMiddleware = (req, res, next) => {
   if (token && validateToken(token)) {
     req.user = { name: "Rijan", id: 1 };
     next();
+  } else {
+    res.status(401).send({
+      message: "Unauthorized: missing token or token invalid",
+    });
   }
 };
 
