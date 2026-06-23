@@ -9,8 +9,7 @@ userRouter.get("/getAllUser", (req, res) => {
   res.send("Get All Users");
 });
 userRouter.get("/getUserById", (req, res) => {
-  res.send("Users Page");
+  res.send("Users by ID");
 });
-userRouter.get("/create-user", (req, res) => {
-  res.send("Get user by ID");
-});
+
+export default userRouter;
