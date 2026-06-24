@@ -3,9 +3,10 @@ import session from "express-session";
 
 const app = express();
 const PORT = 8080;
+// Global MiddleWare
+app.use(express.json());
 
-app.use(session({}));
-
+// Routes
 app.get("/", (req, res) => {
   res.send("Welcome to Task Manager API ");
 });
