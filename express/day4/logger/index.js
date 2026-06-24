@@ -32,8 +32,14 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/logout", (req, res) => {
-  req.session.destroy();
-  res.send("User Logged Out");
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).send("Unable to logout");
+    }
+
+    res.clearCookie("connect.sid");
+    res.send("User Logged Out");
+  });
 });
 
 app.listen(PORT, () => {
