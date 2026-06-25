@@ -7,6 +7,18 @@ const app = express();
 const PORT = 8080;
 // Global MiddleWare
 app.use(express.json());
+application.use(
+  session({
+    secret: "HelloWorld",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: false,
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+  }),
+);
 
 // Routes
 app.get("/", (req, res) => {
