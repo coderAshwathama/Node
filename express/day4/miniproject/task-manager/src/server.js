@@ -2,6 +2,7 @@ import express from "express";
 import session from "express-session";
 
 import authRoute from "./routes/auth.routes.js";
+
 const app = express();
 const PORT = 8080;
 // Global MiddleWare
